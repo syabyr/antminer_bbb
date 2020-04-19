@@ -1,0 +1,12 @@
+这个U-boot源码是针对蚂蚁矿机版本的BeagleBone Black。
+
+由于矿机版本BBB板没有 ID eeprom, 存储为NAND flash，所以U-boot并不能通用。
+
+# 使用方法
+$ git clone https://gitee.com/vesta_admin/u-boot.git
+$ cd u-boot
+$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
+$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- am335x_antboard_defconfig
+$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j6
+
+
