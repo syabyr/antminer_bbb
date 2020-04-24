@@ -45,12 +45,12 @@
 		"${optargs} " \
 		"root=${nandroot} " \
 		"rootfstype=${nandrootfstype}\0" \
-	"nandroot=ubi0:rootfs rw ubi.mtd=NAND.file-system,2048\0" \
+	"nandroot=ubi0:nand.rootfs rw ubi.mtd=rootfs,512\0" \
 	"nandrootfstype=ubifs rootwait=1\0" \
 	"nandboot=echo Booting from nand ...; " \
 		"run nandargs; " \
-		"nand read ${fdtaddr} NAND.u-boot-spl-os; " \
-		"nand read ${loadaddr} NAND.kernel; " \
+		"nand read ${fdtaddr} nand.spl_backup1; " \
+		"nand read ${loadaddr} nand.kernel; " \
 		"bootz ${loadaddr} - ${fdtaddr}\0"
 #else
 #define NANDARGS ""
@@ -227,7 +227,7 @@
 #define CONFIG_SYS_NAND_ECCBYTES	14
 #define CONFIG_SYS_NAND_ONFI_DETECTION
 #define CONFIG_NAND_OMAP_ECCSCHEME	OMAP_ECC_BCH8_CODE_HW
-#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x000c0000
+#define CONFIG_SYS_NAND_U_BOOT_OFFS	0x00040000
 /* NAND: SPL related configs */
 #ifdef CONFIG_SPL_OS_BOOT
 #define CONFIG_SYS_NAND_SPL_KERNEL_OFFS	0x00200000 /* kernel offset */
@@ -296,8 +296,8 @@
 #define CONFIG_ENV_OFFSET		(768 << 10) /* 768 KiB in */
 #define CONFIG_ENV_OFFSET_REDUND	(896 << 10) /* 896 KiB in */
 #elif defined(CONFIG_ENV_IS_IN_NAND)
-#define CONFIG_ENV_OFFSET		0x001c0000
-#define CONFIG_ENV_OFFSET_REDUND	0x001e0000
+#define CONFIG_ENV_OFFSET		0x00140000
+#define CONFIG_ENV_OFFSET_REDUND	0x00160000
 #define CONFIG_SYS_ENV_SECT_SIZE	CONFIG_SYS_NAND_BLOCK_SIZE
 #elif defined(CONFIG_EMMC_BOOT)
 #define CONFIG_SYS_MMC_ENV_DEV		1
