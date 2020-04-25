@@ -91,6 +91,25 @@
 			AM33XX_IOPAD(0x97c, PIN_INPUT_PULLUP | MUX_MODE3)	/* uart1_rtsn.i2c2_scl */
 		>;
 	};
+	spi0_pins: pinmux_spi0_pins {
+		pinctrl-single,pins = <
+			AM33XX_IOPAD(0x954, PIN_INPUT_PULLUP | MUX_MODE0)	/* SPI0_MOSI - spi0_d0.spi0_d0 */
+			AM33XX_IOPAD(0x958, PIN_INPUT_PULLUP | MUX_MODE0)	/* SPI0_MISO - spi0_d1.spi0_d1 */
+			AM33XX_IOPAD(0x950, PIN_INPUT_PULLUP | MUX_MODE0)	/* SPI0_CLK  - spi0_clk.spi0_clk */
+			AM33XX_IOPAD(0x95c, PIN_OUTPUT_PULLUP | MUX_MODE0)	/* SPI0_CS0 (NBATTSS) - spi0_cs0.spi0_cs0 */
+			AM33XX_IOPAD(0x960, PIN_OUTPUT_PULLUP | MUX_MODE0)	/* SPI0_CS1 (FPGA_FLASH_NCS) - spi0_cs1.spi0_cs1 */
+		>;
+	};
+
+	spi1_pins: pinmux_spi1_pins {
+		pinctrl-single,pins = <
+			AM33XX_IOPAD(0x990, PIN_INPUT_PULLUP | MUX_MODE0)	/* SPI1_MOSI - spi1_d0.spi1_d0 */
+			AM33XX_IOPAD(0x994, PIN_INPUT_PULLUP | MUX_MODE0)	/* SPI1_MISO - spi1_d1.spi1_d1 */
+			AM33XX_IOPAD(0x998, PIN_INPUT_PULLUP | MUX_MODE0)	/* SPI1_CLK  - spi1_clk.spi1_clk */
+			AM33XX_IOPAD(0x99c, PIN_OUTPUT_PULLUP | MUX_MODE0)	/* SPI1_CS0 (NBATTSS) - spi1_cs0.spi1_cs0 */
+			AM33XX_IOPAD(0x964, PIN_OUTPUT_PULLUP | MUX_MODE0)	/* SPI1_CS1 (FPGA_FLASH_NCS) - spi1_cs1.spi_cs1 */
+		>;
+	};
 
 	uart0_pins: pinmux_uart0_pins {
 		pinctrl-single,pins = <
@@ -159,11 +178,6 @@
 		>;
 	};
 
-	mmc1_pins: pinmux_mmc1_pins {
-		pinctrl-single,pins = <
-			AM33XX_IOPAD(0x960, PIN_INPUT | MUX_MODE7) /* GPIO0_6 */
-		>;
-	};
 };
 
 
@@ -279,6 +293,42 @@
 	};
 };
 
+&spi0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi0_pins>;
+
+	channel@0 {
+		compatible="linux,spidev";
+		spi-max-frequency=<16000000>;
+        reg = <0>;
+        spi-cpha;
+	};
+
+	channel@1 {
+		compatible="linux,spidev";
+		spi-max-frequency=<16000000>;
+        reg = <1>;
+	};
+};
+
+&spi1 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi1_pins>;
+
+	channel@0 {
+		compatible="linux,spidev";
+		spi-max-frequency=<16000000>;
+        reg = <0>;
+        spi-cpha;
+	};
+	channel@1 {
+		compatible="linux,spidev";
+		spi-max-frequency=<16000000>;
+        reg = <1>;
+	};
+};
 
 /include/ "tps65217.dtsi"
 
@@ -380,13 +430,6 @@
 	status = "okay";
 };
 
-&mmc1 {
-	status = "okay";
-	bus-width = <0x4>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&mmc1_pins>;
-	cd-gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
-};
 
 &aes {
 	status = "okay";
