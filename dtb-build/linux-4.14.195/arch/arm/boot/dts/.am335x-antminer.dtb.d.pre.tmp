@@ -1,0 +1,9 @@
+am335x-antminer.o: arch/arm/boot/dts/am335x-antminer.dts \
+ arch/arm/boot/dts/am33xx.dtsi \
+ scripts/dtc/include-prefixes/dt-bindings/gpio/gpio.h \
+ scripts/dtc/include-prefixes/dt-bindings/pinctrl/am33xx.h \
+ scripts/dtc/include-prefixes/dt-bindings/pinctrl/omap.h \
+ arch/arm/boot/dts/am335x-ant-common.dtsi \
+ arch/arm/boot/dts/am335x-antminer-common.dtsi \
+ scripts/dtc/include-prefixes/dt-bindings/display/tda998x.h \
+ scripts/dtc/include-prefixes/dt-bindings/interrupt-controller/irq.h
