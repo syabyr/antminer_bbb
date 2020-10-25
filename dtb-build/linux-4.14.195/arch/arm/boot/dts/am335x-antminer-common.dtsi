@@ -157,13 +157,17 @@
 				};
 
 				partition@5 {
-					label = "kernel";
-					reg = <0x180000 0xc00000>;
+					label = "dtb";
+					reg = <0x180000 0x20000>;
 				};
 
 				partition@6 {
+					label = "kernel";
+					reg = <0x1a0000 0xc00000>;
+				};
+				partition@7 {
 					label = "rootfs";
-					reg = <0xd80000 0xf280000>;
+					reg = <0xda0000 0xf260000>;
 				};
 	};
 };
