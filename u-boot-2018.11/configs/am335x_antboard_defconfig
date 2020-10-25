@@ -22,7 +22,7 @@ CONFIG_CMD_NAND=y
 # CONFIG_CMD_SETEXPR is not set
 CONFIG_CMD_MTDPARTS=y
 CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
-CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:128k(nand.spl),128k(nand.spl_backup1),1m(nand.u-boot),128k(nand.u-boot-env),128k(nand.u-boot-env.backup1),12m(nand.kernel),-(nand.rootfs)"
+CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:128k(nand.spl),128k(nand.spl_backup1),1m(nand.u-boot),128k(nand.u-boot-env),128k(nand.u-boot-env.backup1),128k(nand.dtb),12m(nand.kernel),-(nand.rootfs)"
 CONFIG_CMD_UBI=y
 # CONFIG_ENV_IS_IN_FAT is not set
 CONFIG_ENV_IS_IN_NAND=y
