@@ -45,7 +45,7 @@
 		"${optargs} " \
 		"root=${nandroot} " \
 		"rootfstype=${nandrootfstype}\0" \
-	"nandroot=ubi0:nand.rootfs rw ubi.mtd=rootfs,512\0" \
+	"nandroot=ubi0:rootfs rw ubi.mtd=rootfs,512\0" \
 	"nandrootfstype=ubifs rootwait=1\0" \
 	"nandboot=echo Booting from nand ...; " \
 		"run nandargs; " \
